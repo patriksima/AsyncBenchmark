@@ -6,7 +6,7 @@ namespace TestAsync;
 public class Benchy
 {
     public static readonly Task<string> ExampleTask = Task.FromResult("I'm great developer.");
-    public static readonly ValueTask<string> ExampleValueTask = new ValueTask<string>("I'm great!");
+    public static readonly ValueTask<string> ExampleValueTask = ValueTask.FromResult<string>("I'm great developer");
 
     [Benchmark]
     public async Task<string> GetStringWithAsync()
