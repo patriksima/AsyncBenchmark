@@ -5,9 +5,6 @@ namespace TestAsync;
 [MemoryDiagnoser]
 public class Benchy
 {
-    public static readonly Task<string> ExampleTask = Task.FromResult("I'm great developer.");
-    public static readonly ValueTask<string> ExampleValueTask = ValueTask.FromResult<string>("I'm great developer");
-
     [Benchmark]
     public async Task<string> GetStringWithAsync()
     {
@@ -16,7 +13,7 @@ public class Benchy
 
     private async Task<string> GetStringWithAsyncCore()
     {
-        return await ExampleTask;
+        return await Task.FromResult<string>("I'm great developer.");
     }
 
     [Benchmark]
@@ -27,7 +24,7 @@ public class Benchy
 
     private Task<string> GetStringWithoutAsyncCore()
     {
-        return ExampleTask;
+        return Task.FromResult<string>("I'm great developer.");
     }
 
     [Benchmark]
@@ -38,7 +35,7 @@ public class Benchy
 
     private ValueTask<string> GetStringWithoutAsyncValueCore()
     {
-        return ExampleValueTask;
+        return ValueTask.FromResult<string>("I'm great developer");
     }
 
     [Benchmark]
@@ -49,6 +46,12 @@ public class Benchy
 
     private async ValueTask<string> GetStringWithAsyncValueCore()
     {
-        return await ExampleValueTask;
+        return await ValueTask.FromResult<string>("I'm great developer");
+    }
+    
+    [Benchmark]
+    public string GetStringSync()
+    {
+        return "I'm great developer.";
     }
 }
