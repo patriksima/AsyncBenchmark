@@ -35,3 +35,13 @@ private async Task<string> GetStringWithAsyncCore()
 {
     return await Task.FromResult("I'm great developer.");
 }
+```
+
+## Benchmark
+| Method                     | Mean       | Error     | StdDev    | Gen0   | Allocated |
+|--------------------------- |-----------:|----------:|----------:|-------:|----------:|
+| GetStringWithAsync         | 30.4626 ns | 0.7727 ns | 2.2295 ns | 0.0344 |     216 B |
+| GetStringWithoutAsync      | 17.3824 ns | 0.3938 ns | 0.6471 ns | 0.0229 |     144 B |
+| GetStringWithoutAsyncValue | 10.6441 ns | 0.0675 ns | 0.0598 ns |      - |         - |
+| GetStringWithAsyncValue    | 17.6272 ns | 0.1637 ns | 0.1278 ns |      - |         - |
+| GetStringSync              |  0.0625 ns | 0.0202 ns | 0.0189 ns |      - |         - |
